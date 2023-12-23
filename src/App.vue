@@ -9,10 +9,8 @@
     <img src="./assets/logo.png" class="logo" alt="임시 로고"/>
   </div>
 
-  <Container :posts="posts"/>
-  <button @click="morePost" type="button" class="btn">
-    피드 더보기
-  </button>
+  <Container :posts="posts" :step="step" />
+  <button @click="morePost" type="button" class="btn">피드 더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -20,6 +18,7 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
 </template>
 
 <script>
@@ -36,6 +35,7 @@ export default {
     return {
       posts: posts,
       moreCount: 0,
+      step: 0,
     }
   },
   methods: {
