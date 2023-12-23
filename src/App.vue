@@ -4,12 +4,13 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="step += 1">Next</li>
+      <li v-if="step === 1" @click="step += 1">Next</li>
+      <li v-if="step === 2" @click="publish">Write</li>
     </ul>
     <img src="./assets/logo.png" class="logo" alt="임시 로고"/>
   </div>
 
-  <Container :posts="posts" :step="step" :fileUrl="fileUrl"/>
+  <Container @writePost="writeTitle = $event" :posts="posts" :step="step" :fileUrl="fileUrl"/>
 
   <button @click="morePost" type="button" class="btn">피드 더보기</button>
 
@@ -39,6 +40,7 @@ export default {
       moreCount: 0,
       step: 0,
       fileUrl: '',
+      writeTitle: '',
     }
   },
   methods: {
@@ -61,6 +63,23 @@ export default {
       this.step = 1; // 업로드 후 다음 페이지 이동
       this.fileUrl = fileUrl; // data 에 저장
     },
+
+    publish() {
+      let uploadPost = {
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.fileUrl,
+        likes: 0,
+        date: "오늘 날짜",
+        liked: false,
+        content: this.writeTitle,
+        filter: "perpetua"
+      };
+
+      this.posts.unshift(uploadPost);
+      this.step = 0;
+    },
+
 
   }
 }

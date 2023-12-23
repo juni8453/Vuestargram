@@ -20,7 +20,8 @@
       <div v-if="step === 2">
         <div :style="{ backgroundImage: `url(${fileUrl})` }" class="upload-image"></div>
         <div class="write">
-          <textarea class="write-box">write!</textarea>
+          <textarea @input="$emit('writePost', $event.target.value)"
+                    class="write-box">내용을 입력하세요.</textarea>
         </div>
       </div>
 
