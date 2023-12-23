@@ -4,17 +4,19 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step += 1">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" alt="임시 로고"/>
   </div>
 
-  <Container :posts="posts" :step="step" />
+  <Container :posts="posts" :step="step" :fileUrl="fileUrl"/>
+
   <button @click="morePost" type="button" class="btn">피드 더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile"/>
+      <!-- <input multiple> 사용하면 여러 장 등록 가능 -->
+      <input @change="upload" type="file" id="file" class="inputfile"/>
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -36,6 +38,7 @@ export default {
       posts: posts,
       moreCount: 0,
       step: 0,
+      fileUrl: '',
     }
   },
   methods: {
@@ -48,7 +51,17 @@ export default {
       }).catch((err) => {
         console.log(err);
       });
-    }
+    },
+
+    // <input> 활용 시 event 로 파일 정보를 확인할 수 있다.
+    upload(event) {
+      let file = event.target.files;
+      console.log(file[0].type);
+      let fileUrl = URL.createObjectURL(file[0]); // 임시 URL 생성
+      this.step = 1; // 업로드 후 다음 페이지 이동
+      this.fileUrl = fileUrl; // data 에 저장
+    },
+
   }
 }
 </script>
