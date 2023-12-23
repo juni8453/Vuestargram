@@ -1,10 +1,13 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
+      <div class="profile" :style="{ backgroundImage: `url(${post.userImage})` }"></div>
       <span class="profile-name">{{ post.name }}</span>
     </div>
-    <div class="post-body"></div>
+    <!-- CSS 속성에 데이터 바인딩을 위해 콜론 사용 -->
+    <!-- 오브젝트 자료형을 활용해 { CSS 속성 : '' } 로 편리하게 사용 가능 -->
+    <!-- 문자 중간에 변수 바인딩이 필요하면 `${ 변수 }` 로 활용가능 -->
+    <div class="post-body" :style="{ backgroundImage :`url(${post.postImage})`}"></div>
     <div class="post-content">
       <p>{{ post.likes }}</p>
       <p><strong>{{ post.name }}</strong> {{ post.content }}</p>
@@ -28,7 +31,6 @@ export default {
 }
 
 .profile {
-  background-image: url("https://picsum.photos/100?random=0");
   width: 30px;
   height: 30px;
   background-size: 100%;
@@ -50,7 +52,6 @@ export default {
 }
 
 .post-body {
-  background-image: url("https://picsum.photos/600?random=0");
   height: 450px;
   max-width: 100%;
   background-position: center;
