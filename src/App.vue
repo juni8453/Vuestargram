@@ -10,6 +10,9 @@
   </div>
 
   <Container :posts="posts"/>
+  <button @click="morePost" type="button" class="btn">
+    피드 더보기
+  </button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -22,6 +25,7 @@
 <script>
 import Container from "./components/Container";
 import posts from "./json/posts.js"
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -31,8 +35,21 @@ export default {
   data() {
     return {
       posts: posts,
+      moreCount: 0,
     }
   },
+  methods: {
+    morePost() {
+      axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
+      .then((response) => {
+        console.log(response);
+        this.posts.push(response.data);
+        this.moreCount += 1;
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  }
 }
 </script>
 
