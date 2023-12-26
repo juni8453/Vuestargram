@@ -1,30 +1,26 @@
 import { createStore } from 'vuex'
+import posts from '../json/posts.js'
 
 const store = createStore({
   state() {
     return {
-      name: "kim",
-      age: 20,
-      likes: 30,
-      isLikes: false,
+      posts: posts,
     }
   },
 
   mutations: {
-    addAge(state, payload) {
-      state.age += payload;
+    addLikes(state, index) {
+
+      if (state.posts[index].liked === false) {
+        state.posts[index].likes ++;
+        state.posts[index].liked = true;
+      } else {
+        state.posts[index].likes --;
+        state.posts[index].liked = false;
+      }
     },
 
-    addLikes(state) {
-      if (state.isLikes) {
-        state.likes -= 1;
-        state.isLikes = false;
-      } else {
-        state.likes += 1;
-        state.isLikes = true;
-      }
-    }
-  }
+  },
 
 })
 

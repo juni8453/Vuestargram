@@ -4,6 +4,7 @@
       <div v-if="step === 0">
         <Post v-for="(post, i) in posts" :key="i"
               :post="post"
+              :postIndex="i"
               :step="step"
         />
       </div>

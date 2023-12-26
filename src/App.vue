@@ -37,9 +37,10 @@
 
 <script>
 import Container from "./components/Container";
-import posts from "./json/posts.js"
+// import posts from "./json/posts.js"
 import filters from "./json/filters.js"
 import axios from 'axios';
+import store from './json/store.js'
 
 export default {
   name: 'App',
@@ -58,7 +59,7 @@ export default {
 
   data() {
     return {
-      posts: posts,
+      posts: store.state.posts,
       moreCount: 0,
       step: 0,
       fileUrl: '',
