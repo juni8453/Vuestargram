@@ -6,7 +6,7 @@ let posts = [
     likes: 36,
     date: "May 15",
     liked: false,
-    content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
+    content: "오늘 무엇을 했냐면요 아무것도 안했어요.",
     filter: "perpetua"
   },
   {

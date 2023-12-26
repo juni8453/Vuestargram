@@ -7,9 +7,12 @@
     <!-- CSS 속성에 데이터 바인딩을 위해 콜론 사용 -->
     <!-- 오브젝트 자료형을 활용해 { CSS 속성 : '' } 로 편리하게 사용 가능 -->
     <!-- 문자 중간에 변수 바인딩이 필요하면 `${ 변수 }` 로 활용가능 -->
-    <div :class="post.filter" class="post-body" :style="{ backgroundImage :`url(${post.postImage})`}"></div>
+    <div @click="$store.commit('addLikes')"
+         :class="post.filter" class="post-body"
+         :style="{ backgroundImage :`url(${post.postImage})`}"></div>
     <div class="post-content">
-      <p>{{ post.likes }}</p>
+       <p>{{ post.likes }} Likes</p>
+<!--      <p>{{ $store.state.likes }} Likes</p>-->
       <p><strong>{{ post.name }}</strong> {{ post.content }}</p>
       <p class="date">{{ post.date }}</p>
     </div>

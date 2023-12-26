@@ -10,6 +10,11 @@
     <img src="./assets/logo.png" class="logo" alt="임시 로고"/>
   </div>
 
+  <!-- store 내 데이터 수정 예시
+  <p>{{$store.state.age}}</p>
+  <button @click="$store.commit('addAge', 10)"></button>
+  -->
+
   <Container @writePost="writeTitle = $event"
              :posts="posts"
              :step="step"
