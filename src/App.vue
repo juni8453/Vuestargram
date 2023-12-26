@@ -10,7 +10,11 @@
     <img src="./assets/logo.png" class="logo" alt="임시 로고"/>
   </div>
 
-  <Container @writePost="writeTitle = $event" :posts="posts" :step="step" :fileUrl="fileUrl"/>
+  <Container @writePost="writeTitle = $event"
+             :posts="posts"
+             :step="step"
+             :fileUrl="fileUrl"
+             :filters="filters" />
 
   <button @click="morePost" type="button" class="btn">피드 더보기</button>
 
@@ -27,6 +31,7 @@
 <script>
 import Container from "./components/Container";
 import posts from "./json/posts.js"
+import filters from "./json/filters.js"
 import axios from 'axios';
 
 export default {
@@ -41,6 +46,7 @@ export default {
       step: 0,
       fileUrl: '',
       writeTitle: '',
+      filters: filters,
     }
   },
   methods: {

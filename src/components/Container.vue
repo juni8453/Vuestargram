@@ -9,11 +9,10 @@
       <div v-if="step === 1">
         <div :style="{ backgroundImage: `url(${fileUrl})` }" class="upload-image"></div>
         <div class="filters">
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
-          <div class="filter-1"></div>
+          <FilterBox v-for="(filter, i) in filters" :key="i"
+                     :fileUrl="fileUrl"
+                     :filter= "filter"
+          ></FilterBox>
         </div>
       </div>
 
@@ -31,16 +30,19 @@
 
 <script>
 import Post from './Post.vue'
+import FilterBox from './FilterBox.vue'
 
 export default {
   name: "Container",
   components: {
     Post: Post,
+    FilterBox: FilterBox,
   },
   props: {
     posts: Array,
     step: Number,
     fileUrl: String,
+    filters: Array,
   },
 }
 </script>
