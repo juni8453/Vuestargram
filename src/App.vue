@@ -29,7 +29,8 @@
 
   <!-- vuex 의 actions, mutations 를 활용해 axios 요청하는 예시 -->
   <!-- 결국 vuex 의 state 에 데이터를 모아두는 형식으로 개발하지까 이렇게 많이 사용할 듯 .. -->
-  <button @click="$store.dispatch('getMoreDate')" type="button" class="btn">피드 더보기</button>
+<!--  <button @click="$store.dispatch('getMoreDate')" type="button" class="btn">피드 더보기</button>-->
+  <button @click="getMoreDate" type="button" class="btn">피드 더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -45,7 +46,7 @@
 import Container from "./components/Container";
 import filters from "./json/filters.js"
 import axios from 'axios';
-import store from './json/store.js'
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -64,8 +65,10 @@ export default {
 
   data() {
     return {
-      posts: store.state.posts,
-      moreCount: 0,
+      // 이제 vuex state 에서 posts, moreCount 를 관리하기 때문에 data 에서 빼준다.
+      // posts: posts,
+      // moreCount: 0,
+
       step: 0,
       fileUrl: '',
       writeTitle: '',
@@ -73,7 +76,19 @@ export default {
       filterName: '',
     }
   },
+
+  // computed 내부 함수는 호출마다 해당 함수가 실행되지 않는다.
+  // vue 파일을 처음 load 할 때 함수가 호출되면서 값을 간직한다. 이후 호출될 때마다 저장된 값을 뱉어줌.
+  // 즉, 처음 계산 결과를 저장해두는 용도
+  computed: {
+    ...mapState(['posts', 'moreCount']),
+  },
+
+  // methods 내부 함수는 호출마다 해당 함수가 실행된다.
+  // getMoreDate 는 피드를 갱신하는 것이니 computed 가 아니라 methods 가 맞는듯 ?
   methods: {
+    ...mapActions(['getMoreDate']),
+
     morePost() {
       axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
       .then((response) => {
