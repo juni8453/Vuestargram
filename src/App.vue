@@ -23,7 +23,13 @@
              :filterName="filterName"
   />
 
-  <button @click="morePost" type="button" class="btn">피드 더보기</button>
+  <!-- method 로 axios 요청하는 예시
+    <button @click="morePost" type="button" class="btn">피드 더보기</button>
+  -->
+
+  <!-- vuex 의 actions, mutations 를 활용해 axios 요청하는 예시 -->
+  <!-- 결국 vuex 의 state 에 데이터를 모아두는 형식으로 개발하지까 이렇게 많이 사용할 듯 .. -->
+  <button @click="$store.dispatch('getMoreDate')" type="button" class="btn">피드 더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -37,7 +43,6 @@
 
 <script>
 import Container from "./components/Container";
-// import posts from "./json/posts.js"
 import filters from "./json/filters.js"
 import axios from 'axios';
 import store from './json/store.js'
