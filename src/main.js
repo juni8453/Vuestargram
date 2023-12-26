@@ -3,5 +3,10 @@ import App from './App.vue'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Router from './router/Router.js'
+import mitt from 'mitt'
 
-createApp(App).use(Router).mount('#app')
+let emitter = mitt();
+let app = createApp(App);
+app.config.globalProperties.emitter = emitter;
+
+app.use(Router).mount('#app')

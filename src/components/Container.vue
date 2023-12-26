@@ -3,21 +3,22 @@
     <div>
       <div v-if="step === 0">
         <Post v-for="(post, i) in posts" :key="i"
-              :post="post" :step="step"/>
+              :post="post"
+              :step="step"
+        />
       </div>
 
       <div v-if="step === 1">
-        <div :style="{ backgroundImage: `url(${fileUrl})` }" class="upload-image"></div>
+        <div :class="filterName" class="upload-image" :style="{ backgroundImage: `url(${fileUrl})` }"></div>
         <div class="filters">
           <FilterBox v-for="(filter, i) in filters" :key="i"
                      :fileUrl="fileUrl"
-                     :filter= "filter"
-          ></FilterBox>
+                     :filter= "filter" />
         </div>
       </div>
 
       <div v-if="step === 2">
-        <div :style="{ backgroundImage: `url(${fileUrl})` }" class="upload-image"></div>
+        <div :class="filterName" class="upload-image" :style="{ backgroundImage: `url(${fileUrl})` }"></div>
         <div class="write">
           <textarea @input="$emit('writePost', $event.target.value)"
                     class="write-box">내용을 입력하세요.</textarea>
@@ -43,6 +44,7 @@ export default {
     step: Number,
     fileUrl: String,
     filters: Array,
+    filterName: String,
   },
 }
 </script>
@@ -62,15 +64,15 @@ export default {
   margin: 20px;
 }
 
-.filter-1 {
+.filter-item {
   width: 100px;
   height: 100px;
-  background-color: cornflowerblue;
   margin: 10px 10px 10px auto;
   padding: 8px;
   display: inline-block;
-  color: white;
+  color : white;
   background-size: cover;
+  background-position : center;
 }
 
 .filters::-webkit-scrollbar {

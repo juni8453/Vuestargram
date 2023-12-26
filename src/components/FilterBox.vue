@@ -1,5 +1,10 @@
 <template>
-  <div :class="filter + ' filter-item'" :style="{backgroundImage : `url(${fileUrl})`}"></div>
+  <div :class="filter + ' filter-item'"
+       :style="{backgroundImage : `url(${fileUrl})`}"
+       @click="sendFilter"
+  >
+    <p class="filter-name">{{filter}}</p>
+  </div>
 </template>
 
 <script>
@@ -8,6 +13,12 @@ export default {
   props: {
     fileUrl: String,
     filter: String,
+  },
+  methods: {
+    // emitter 를 활용해 다른 컴포넌트로 이벤트 발사
+    sendFilter() {
+      this.emitter.emit('sendFilter', this.filter);
+    }
   },
 }
 </script>
@@ -23,6 +34,12 @@ export default {
   color : white;
   background-size: cover;
   background-position : center;
+}
+
+.filter-name {
+  color: white;
+  font-size: small;
+  margin-bottom: 0;
 }
 
 </style>

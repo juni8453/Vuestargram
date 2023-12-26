@@ -14,7 +14,9 @@
              :posts="posts"
              :step="step"
              :fileUrl="fileUrl"
-             :filters="filters" />
+             :filters="filters"
+             :filterName="filterName"
+  />
 
   <button @click="morePost" type="button" class="btn">피드 더보기</button>
 
@@ -39,6 +41,16 @@ export default {
   components: {
     Container: Container
   },
+
+  // emitter 로 발사한 데이터 수신은 mounted() 에 한다.
+  // 너무 많이 쓰면 헷갈리니 vuex 를 쓰는게 낫다.
+  mounted() {
+    this.emitter.on('sendFilter', (filterName) => {
+      console.log(filterName);
+      this.filterName = filterName;
+    })
+  },
+
   data() {
     return {
       posts: posts,
@@ -47,6 +59,7 @@ export default {
       fileUrl: '',
       writeTitle: '',
       filters: filters,
+      filterName: '',
     }
   },
   methods: {
@@ -79,7 +92,7 @@ export default {
         date: "오늘 날짜",
         liked: false,
         content: this.writeTitle,
-        filter: "perpetua"
+        filter: this.filterName
       };
 
       this.posts.unshift(uploadPost);
